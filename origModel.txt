@@ -1,0 +1,12 @@
+model/
+├── simulation.py               # Main simulation loop, generates df and results.csv
+├── config.py                   # Simulation parameters
+├── population.py               # Bacterial growth, persistence, resistance, mutation
+├── treatment.py                # Dosing schedule and pharmacokinetics
+├── immune.py                   # Immune response dynamics
+├── recorder.py                 # Metrics and results logging
+├── batchRunner.py              # Run grid of persistence, mutation values
+├── plotFigureB.py              # generates 6-panel subplot from Figure 4
+├── plotTimeToRes.py            # 
+├── plotAucBurden.py            #
+├── runBatch.py                 # Runs batchRunner

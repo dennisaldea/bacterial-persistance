@@ -19,7 +19,14 @@ def run(cfg, muPersisters=None):
         if pop.isResistant():
             break
         t += cfg['dt']
-    return rec.toDf()
+        
+    df = rec.toDf()
+    
+    df['a'] = cfg['kSwitch']
+    df['muG'] = cfg['mu']
+    df['muP'] = muP
+    df['rThresh'] = cfg['rThresh']
+    return df
 
 if __name__ == '__main__':
     df = run(cfg, muPersisters=muP)

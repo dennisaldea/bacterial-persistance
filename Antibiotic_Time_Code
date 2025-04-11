@@ -1,0 +1,101 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.signal import convolve2d
+
+# Parameters
+grid_size = 20  # 20x20 grid
+time_steps = 200
+treatment_time = 50  # Time step to apply antibiotic
+treatment_duration = 10
+diffusion_rate = 0.1  # Rate of bacterial movement
+
+# Growth and death rates
+r = {'S': 0.1, 'T': 0.05, 'R': 0.1, 'P': 0.0}
+d = {'S': 0.01, 'T': 0.01, 'R': 0.01, 'P': 0.001}
+antibiotic_kill = {'S': 0.5, 'T': 0.2, 'R': 0.0, 'P': 0.0}
+
+# Mutation and switching rates
+mutation_rates = {'S_to_T': 1e-6, 'S_to_R': 1e-6, 'T_to_R': 1e-6}
+switch_to_P = 0.01
+switch_from_P = 0.01
+
+# Initialize grid
+def initialize_grid():
+    S = np.zeros((grid_size, grid_size))
+    P = np.zeros_like(S)
+    T = np.zeros_like(S)
+    R = np.zeros_like(S)
+    # Initial infection in the center
+    S[grid_size//2, grid_size//2] = 1e4
+    antibiotic = np.zeros_like(S)
+    nutrients = np.ones_like(S)
+    return S, P, T, R, antibiotic, nutrients
+
+S, P, T, R, antibiotic, nutrients = initialize_grid()
+K = 1e6  # Carrying capacity
+
+# Helper function for diffusion
+def diffuse(pop, rate):
+    if rate == 0:
+        return pop
+    kernel = np.array([[0, rate/4, 0],
+                       [rate/4, 0, rate/4],
+                       [0, rate/4, 0]])
+    incoming = convolve2d(pop, kernel, mode='same', boundary='symm')
+    remaining = (1 - rate) * pop
+    return remaining + incoming
+
+# Simulation loop
+history = {'S': [], 'P': [], 'T': [], 'R': []}
+
+for t in range(time_steps):
+    # Apply antibiotic
+    if treatment_time <= t < treatment_time + treatment_duration:
+        antibiotic += 0.5  # Apply to entire grid
+    antibiotic *= 0.9  # Exponential decay
+    
+    # Update each patch
+    delta_S = r['S'] * S * (1 - (S + P + T + R)/K) * nutrients - \
+              (d['S'] + antibiotic * antibiotic_kill['S']) * S - \
+              switch_to_P * S + switch_from_P * P - \
+              (mutation_rates['S_to_T'] + mutation_rates['S_to_R']) * S
+    
+    delta_P = -d['P'] * P + switch_to_P * S - switch_from_P * P
+    
+    delta_T = r['T'] * T * (1 - (S + P + T + R)/K) * nutrients - \
+              (d['T'] + antibiotic * antibiotic_kill['T']) * T + \
+              mutation_rates['S_to_T'] * S - mutation_rates['T_to_R'] * T
+    
+    delta_R = r['R'] * R * (1 - (S + P + T + R)/K) * nutrients - \
+              d['R'] * R + \
+              mutation_rates['S_to_R'] * S + mutation_rates['T_to_R'] * T
+    
+    # Apply changes
+    S = np.clip(S + delta_S, 0, None)
+    P = np.clip(P + delta_P, 0, None)
+    T = np.clip(T + delta_T, 0, None)
+    R = np.clip(R + delta_R, 0, None)
+    
+    # Diffuse populations
+    S = diffuse(S, diffusion_rate)
+    P = diffuse(P, diffusion_rate)
+    T = diffuse(T, diffusion_rate)
+    R = diffuse(R, diffusion_rate)
+    
+    # Record history
+    history['S'].append(S.sum())
+    history['P'].append(P.sum())
+    history['T'].append(T.sum())
+    history['R'].append(R.sum())
+
+# Visualization
+plt.figure(figsize=(10, 6))
+plt.plot(history['S'], label='Susceptible')
+plt.plot(history['P'], label='Persisters')
+plt.plot(history['T'], label='Tolerant')
+plt.plot(history['R'], label='Resistant')
+plt.axvline(treatment_time, color='r', linestyle='--', label='Antibiotic Start')
+plt.xlabel('Time')
+plt.ylabel('Population')
+plt.legend()
+plt.show()

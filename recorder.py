@@ -1,3 +1,5 @@
+import pandas as pd
+
 class Recorder:
     def __init__(self):
         self.t = []
@@ -12,7 +14,15 @@ class Recorder:
         self.p.append(pop.p)
 
     def toDf(self):
-        import pandas as pd
+        """
+        Convert the recorded data to a pandas DataFrame.
+
+        Returns
+        -------
+        pandas.DataFrame
+            DataFrame containing columns 't', 's', 'r', and 'p' for time, susceptible, resistant,
+            and persister cells respectively.
+        """
         return pd.DataFrame({
             't': self.t,
             's': self.s,

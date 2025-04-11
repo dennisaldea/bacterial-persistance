@@ -1,0 +1,79 @@
+# Compiled source #
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# Packages #
+*.jar
+*.war
+*.ear
+
+# Logs and databases #
+*.log
+*.sql
+*.sqlite
+
+# OS generated files #
+.DS_Store
+Thumbs.db
+
+# Python #
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.env
+*.venv
+*.egg
+*.egg-info/
+.eggs/
+*.pkl
+
+# Jupyter Notebook #
+.ipynb_checkpoints/
+
+# Node.js #
+node_modules/
+
+# Environment files #
+.env
+.env.*
+
+# IDE files #
+.idea/
+.vscode/
+*.iml
+
+# Build directories #
+build/
+dist/
+
+# Custom #
+/data/
+
+# Testing #
+.tox/
+.nox/
+.coverage
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+
+# Documentation #
+docs/_build/
+site/
+
+# Distribution #
+*.egg-info/
+.installed.cfg
+*.egg
+*.whl
+
+# C extensions #
+*.c
+*.cpp
+*.h
+*.so

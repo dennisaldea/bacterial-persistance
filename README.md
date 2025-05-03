@@ -1,5 +1,5 @@
-# implementation of the original model
+# 02731 - Group 8: Bacterial Persistence and Evolution of Antibiotic Evasion
 
-### orig.ipynb has versions of the original model in one 
+### orig.ipynb: implementation of orginial model and drug dosing experiments
 
-### the folder also has a bunch of modularized .py files that i'm trying to reimplement the model in orig.ipynb
+### orig_immune.ipynb: implementation of immune response experiments

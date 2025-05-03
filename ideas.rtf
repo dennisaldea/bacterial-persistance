@@ -1,0 +1,98 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2821
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fswiss\fcharset0 Helvetica-Bold;\f2\fswiss\fcharset0 Helvetica-Oblique;
+\f3\froman\fcharset0 Times-Roman;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;}
+\margl1440\margr1440\vieww20140\viewh14500\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 Core question of the model: How do increased bacterial persistence and mutation rates, individually and in combination, affect the likelihood and timing of the emergence of genetic antibiotic resistance during clinical treatment?\
+\
+Rephrased: Can the coexistence of high persistence (phenotypic tolerance) and elevated mutation rates in bacterial populations synergistically accelerate the evolution of multi-step genetic resistance under realistic clinical treatment conditions, including antibiotic pharmacokinetics and host immune response?\
+\
+Tests: \
+- Whether survival advantage of persisters during treatment is sufficient to promote resistance\
+- Whether mutation rates in persisters play a meaningful role \
+- How these traits together determine treatment success or failure by enabling resistant populations to rise above a clinically relevant threshold (10^8 cells)\
+\
+\pard\pardeftab720\partightenfactor0
+\cf0 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 current model addresses the interplay between persistence and mutation rates in a \strokec2 non-spatial, well-mixed infection context with periodic antibiotic treatment\strokec2 . Extending it to include \strokec2 tolerance\strokec2 , \strokec2 temporal control of treatment\strokec2 , and \strokec2 spatial heterogeneity\
+\
+\
+
+\f1\b Balance between persistence and tolerance
+\f0\b0 \
+Current limitation:\strokec2  The model explicitly handles 
+\f2\i \strokec2 persistence
+\f0\i0 \strokec2  (phenotypic switching to a dormant, drug-insensitive state), but not 
+\f2\i \strokec2 tolerance
+\f0\i0 \strokec2 , which is a \strokec2 population-wide reduction in killing rate\strokec2 , often due to slowed metabolism.\
+\
+\pard\pardeftab720\sa240\partightenfactor0
+\cf0 \strokec2 - Under what conditions 
+\f1\b does tolerance outperform persistence
+\f0\b0 , or vice versa, in promoting survival and resistance?\
+- Can we identify a critical trade-off or optimal ratio between tolerance and persistence for different antibiotic regimens?\
+- Do certain antibiotics or dosing schedules selectively favor one strategy over the other?\
+\
+Possible additions: \
+- Introduce tolerant subpopulation (distinct from persisters; reduced killing rate, but still growing)\
+- Adjust pharmacodynamic terms; tolerance affects killing slope (Hill coefficient) or max kill rate\
+- Allow evolution of tolerance traits (eg upregulation of stress response genes)\
+\
+
+\f1\b Temporal optimization of treatment
+\f0\b0 \
+- Current limitation: fixed-interval dosing\
+- Can dynamically timed treatments (early vs delayed, pulsed v continuous) exploit weaknesses in persistence/tolerance balance?\
+- Can delaying treatment allow immune response to reduce persisters before antibiotics are used?\
+- What timing strategies minimize the emergence of resistance in mixed tolerant/persistent populations?\
+\
+Possible additions:\
+- Time-dependent treatment schedules\
+- Feedback controls (adaptive dosing based on immune response or bacterial load)\
+- Compare outcomes like time to resistance, total bacterial burden, clearance success\
+\
+
+\f1\b Spatial structure
+\f0\b0 \
+- Current limitation: assumes well-mixed environment (no spatial variation)\
+- How do spatial gradients affect persistence/tolerance/resistance?\
+- Are certain infection sites more prone to resistance because of spatial refuges?\
+- Can spatially targeted treatments reduce resistance?\
+\
+Possible additions:\
+- 
+\f1\b Spatial structure
+\f0\b0  via:\
+ 	- Compartmental models (eg lung, bloodstream, tissue)\
+	- PDEs to simulate antibiotic diffusion or diffusion of immune effectors and bacteria\
+	- Agent-based modeling if discrete spatial resolution is needed\
+- Include differential antibiotic penetration and immune access in compartments\
+- Track migration or diffusion of bacteria across compartments\
+\
+
+\f1\b Scenario testing:
+\f0\b0 \
+- Emergence of resistance under:\
+	- high tolerance v high persistence\
+	- early v delayed antibiotic dosing\
+	- nfections in peripheral tissues v. bloodstream\
+\pard\pardeftab720\partightenfactor0
+
+\f1\b \cf0 \strokec2 Multi-objective optimization
+\f0\b0 \strokec2  to find:\
+	- treatment schedules to max clearance and min resistance\
+	- trait combos (tolerance, persistence, but rate) that optimize bacterial survival or resistance 			emergence\
+\
+\
+\pard\pardeftab720\sa240\partightenfactor0
+\cf0 \strokec2 \
+
+\f3 \
+\pard\pardeftab720\partightenfactor0
+\cf0 \strokec2 \
+\pard\pardeftab720\partightenfactor0
+\cf0 \
+}
